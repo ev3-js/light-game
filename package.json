@@ -1,0 +1,22 @@
+{
+  "name": "light-game",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ev3-js/light-game.git"
+  },
+  "author": "danleavitt0",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ev3-js/light-game/issues"
+  },
+  "homepage": "https://github.com/ev3-js/light-game#readme",
+  "dependencies": {
+    "firebase": "^3.0.4"
+  }
+}
