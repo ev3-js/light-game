@@ -1,4 +1,4 @@
-import {addLight, removeLight, buttonPress} from './actions'
+import {addLight, removeLight} from './actions'
 
 export default (state, action) => {
   switch (action.type) {

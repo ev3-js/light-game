@@ -7,7 +7,7 @@ const removeLight = createAction('lightGame/DEACTIVATE_LIGHT')
 let deviceRef
 
 function deactivateLight (active, port) {
-  active = active.filter((num) => num != port)
+  active = active.filter((num) => num !== port)
   return [
     updateActive(active),
     removeLight(active)

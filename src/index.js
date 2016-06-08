@@ -1,13 +1,11 @@
 import {initApp, activateLight, deactivateLight} from './actions'
-import {middleware, subscribe, unSubscribe, set} from './firebaseMW'
+import {middleware, subscribe, set} from './firebaseMW'
 import {createStore, applyMiddleware} from 'redux'
 import Emitter from 'component-emitter'
-import firebase from 'firebase'
 import reducer from './reducer'
 import config from '../config'
 import flo from 'redux-flo'
 import Rx from 'rx-lite'
-import logger from 'redux-logger'
 
 let getActive
 
@@ -22,7 +20,7 @@ const source = Rx.Observable.fromEvent(
   'press'
 )
 
-function* initialize (deviceRef, active) {
+function * initialize (deviceRef, active) {
   yield initApp(deviceRef, {presses, active})
   yield subscribe({ref: `${deviceRef}/presses`, listener: 'child_changed', cb: function (snap) {
     buttonPress.emit('press', snap.key)
@@ -31,9 +29,8 @@ function* initialize (deviceRef, active) {
 
 function game (deviceRef, opts) {
   opts = {...defaultOpts, ...opts}
-  let store = createStore(reducer, opts, applyMiddleware(flo(), middleware(config), logger()))
+  let store = createStore(reducer, opts, applyMiddleware(flo(), middleware(config)))
   let {dispatch, getState} = store
-  let {points} = opts
 
   dispatch(initialize(deviceRef, opts.active))
   getActive = function () {
