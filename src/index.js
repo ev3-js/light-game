@@ -7,8 +7,6 @@ import config from '../config'
 import flo from 'redux-flo'
 import Rx from 'rx-lite'
 
-let getActive
-
 const defaultOpts = {
   active: [1, 2, 3, 4]
 }
@@ -33,16 +31,16 @@ function game (deviceRef, opts) {
   let {dispatch, getState} = store
 
   dispatch(initialize(deviceRef, opts.active))
-  getActive = function () {
-    return getState().active
+
+  return {
+    getActive: () => getState().active,
+    dispatch
   }
-  return dispatch
 }
 
 export {
   activateLight,
   deactivateLight,
-  getActive,
   source,
   set
 }
