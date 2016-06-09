@@ -34,7 +34,7 @@ function game (deviceRef, opts) {
 
   return {
     getActive: () => getState().active,
-    dispatch
+    runner: dispatch
   }
 }
 
