@@ -26,7 +26,8 @@
     "firebase": "^3.0.4",
     "redux": "^3.5.2",
     "redux-flo": "^2.2.1",
-    "redux-logger": "^2.6.1"
+    "redux-logger": "^2.6.1",
+    "rx-lite": "^4.0.8"
   },
   "devDependencies": {
     "babel-plugin-transform-runtime": "^6.9.0",
