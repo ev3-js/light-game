@@ -6,6 +6,12 @@ const unSubscribe = createAction('lightGame/firebaseUnsub')
 const set = createAction('lightGame/firebaseSet')
 
 function middleware (config) {
+  try {
+    firebase.initializeApp(config)
+  } catch (e) {
+    console.warn(e)
+  }
+
   let db = firebase.database()
 
   return ({dispatch, getState}) => (next) => (action) => {
