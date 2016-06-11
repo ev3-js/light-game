@@ -21,9 +21,8 @@ function middleware (config) {
       case subscribe.type:
         let {listener = 'value'} = action.payload
         if (watched.indexOf(action.payload.ref) === -1) {
-          db.ref(action.payload.ref).on(listener, action.payload.cb)
-        } else {
           watched.push(action.payload.ref)
+          db.ref(action.payload.ref).on(listener, action.payload.cb)
         }
         break
       case unSubscribe.type:
