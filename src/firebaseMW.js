@@ -5,6 +5,8 @@ const subscribe = createAction('lightGame/firebaseSub')
 const unSubscribe = createAction('lightGame/firebaseUnsub')
 const set = createAction('lightGame/firebaseSet')
 
+let watched = []
+
 function middleware (config) {
   try {
     firebase.initializeApp(config)
@@ -18,7 +20,11 @@ function middleware (config) {
     switch (action.type) {
       case subscribe.type:
         let {listener = 'value'} = action.payload
-        db.ref(action.payload.ref).on(listener, action.payload.cb)
+        if (watched.indexOf(action.payload.ref) === -1) {
+          db.ref(action.payload.ref).on(listener, action.payload.cb)
+        } else {
+          watched.push(action.payload.ref)
+        }
         break
       case unSubscribe.type:
         db.ref(action.payload.ref).off('value')
