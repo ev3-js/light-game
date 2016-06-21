@@ -1,5 +1,5 @@
 import {initApp, activateLight, deactivateLight} from './actions'
-import {middleware, subscribe, set} from './firebaseMW'
+import {middleware, subscribe, set, unSubscribe} from './firebaseMW'
 import {createStore, applyMiddleware} from 'redux'
 import Emitter from 'component-emitter'
 import reducer from './reducer'
@@ -20,6 +20,7 @@ const source = Rx.Observable.fromEvent(
 
 function * initialize (deviceRef, active) {
   yield initApp(deviceRef, {presses, active})
+  yield unSubscribe({ref: `${deviceRef}/presses`})
   yield subscribe({ref: `${deviceRef}/presses`, listener: 'child_changed', cb: function (snap) {
     buttonPress.emit('press', snap.key)
   }})
